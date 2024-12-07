@@ -1,0 +1,23 @@
+digraph "classes_Pyreverse" {
+rankdir=BT
+charset="utf-8"
+"Pyreverse.model.CRPBlock" [color="black", fontcolor="black", label=<{CRPBlock|mini_blocks : ModuleList<br ALIGN="LEFT"/>n_stages : int<br ALIGN="LEFT"/>|forward(x)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"Pyreverse.model.EnhancedSharedGenerator" [color="black", fontcolor="black", label=<{EnhancedSharedGenerator|refine : Sequential<br ALIGN="LEFT"/>shared_conv1 : Conv2d<br ALIGN="LEFT"/>shared_conv2 : Conv2d<br ALIGN="LEFT"/>shared_conv3 : Conv2d<br ALIGN="LEFT"/>shared_conv4 : Conv2d<br ALIGN="LEFT"/>shared_crp1<br ALIGN="LEFT"/>shared_crp2<br ALIGN="LEFT"/>shared_crp3<br ALIGN="LEFT"/>shared_crp4<br ALIGN="LEFT"/>|forward(skips)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"Pyreverse.model.MobileNetV3Backbone" [color="black", fontcolor="black", label=<{MobileNetV3Backbone|backbone<br ALIGN="LEFT"/>proj_l1 : Conv2d<br ALIGN="LEFT"/>proj_l11 : Conv2d<br ALIGN="LEFT"/>proj_l3 : Conv2d<br ALIGN="LEFT"/>proj_l7 : Conv2d<br ALIGN="LEFT"/>|forward(x)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"Pyreverse.model.MultiTaskDiscriminator" [color="black", fontcolor="black", label=<{MultiTaskDiscriminator|model : Sequential<br ALIGN="LEFT"/>|forward(inputs)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"Pyreverse.model.MultiTaskModel" [color="black", fontcolor="black", label=<{MultiTaskModel|depth_discriminator<br ALIGN="LEFT"/>depth_output_layer<br ALIGN="LEFT"/>feature_generator<br ALIGN="LEFT"/>multi_task_discriminator<br ALIGN="LEFT"/>seg_discriminator<br ALIGN="LEFT"/>seg_output_layer<br ALIGN="LEFT"/>shared_generator<br ALIGN="LEFT"/>|forward(inputs, input_size, seg_labels, depth_labels, return_discriminator_outputs)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"Pyreverse.train.PerceptualLoss" [color="black", fontcolor="black", label=<{PerceptualLoss|feature_extractor : ModuleDict<br ALIGN="LEFT"/>layers : list<br ALIGN="LEFT"/>|forward(generated, target)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"Pyreverse.model.TaskOutputLayer" [color="black", fontcolor="black", label=<{TaskOutputLayer|final_conv : Conv2d<br ALIGN="LEFT"/>|forward(x, input_size)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"Pyreverse.model.TaskSpecificDiscriminator" [color="black", fontcolor="black", label=<{TaskSpecificDiscriminator|adapt_conv : Conv2d<br ALIGN="LEFT"/>model : Sequential<br ALIGN="LEFT"/>|forward(task_output, labels)<br ALIGN="LEFT"/>}>, shape="record", style="solid"];
+"Pyreverse.model.CRPBlock" -> "Pyreverse.model.EnhancedSharedGenerator" [arrowhead="diamond", arrowtail="none", fontcolor="blue", label="shared_crp1", style="solid"];
+"Pyreverse.model.CRPBlock" -> "Pyreverse.model.EnhancedSharedGenerator" [arrowhead="diamond", arrowtail="none", fontcolor="blue", label="shared_crp2", style="solid"];
+"Pyreverse.model.CRPBlock" -> "Pyreverse.model.EnhancedSharedGenerator" [arrowhead="diamond", arrowtail="none", fontcolor="blue", label="shared_crp3", style="solid"];
+"Pyreverse.model.CRPBlock" -> "Pyreverse.model.EnhancedSharedGenerator" [arrowhead="diamond", arrowtail="none", fontcolor="blue", label="shared_crp4", style="solid"];
+"Pyreverse.model.EnhancedSharedGenerator" -> "Pyreverse.model.MultiTaskModel" [arrowhead="diamond", arrowtail="none", fontcolor="blue", label="shared_generator", style="solid"];
+"Pyreverse.model.MobileNetV3Backbone" -> "Pyreverse.model.MultiTaskModel" [arrowhead="diamond", arrowtail="none", fontcolor="blue", label="feature_generator", style="solid"];
+"Pyreverse.model.MultiTaskDiscriminator" -> "Pyreverse.model.MultiTaskModel" [arrowhead="diamond", arrowtail="none", fontcolor="blue", label="multi_task_discriminator", style="solid"];
+"Pyreverse.model.TaskOutputLayer" -> "Pyreverse.model.MultiTaskModel" [arrowhead="diamond", arrowtail="none", fontcolor="blue", label="seg_output_layer", style="solid"];
+"Pyreverse.model.TaskOutputLayer" -> "Pyreverse.model.MultiTaskModel" [arrowhead="diamond", arrowtail="none", fontcolor="blue", label="depth_output_layer", style="solid"];
+"Pyreverse.model.TaskSpecificDiscriminator" -> "Pyreverse.model.MultiTaskModel" [arrowhead="diamond", arrowtail="none", fontcolor="blue", label="seg_discriminator", style="solid"];
+"Pyreverse.model.TaskSpecificDiscriminator" -> "Pyreverse.model.MultiTaskModel" [arrowhead="diamond", arrowtail="none", fontcolor="blue", label="depth_discriminator", style="solid"];
+}

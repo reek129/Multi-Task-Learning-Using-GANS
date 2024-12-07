@@ -1,0 +1,7 @@
+digraph "packages_Pyreverse" {
+rankdir=BT
+charset="utf-8"
+"Pyreverse.model" [color="black", label=<Pyreverse.model>, shape="box", style="solid"];
+"Pyreverse.train" [color="black", label=<Pyreverse.train>, shape="box", style="solid"];
+"Pyreverse.train" -> "Pyreverse.model" [arrowhead="open", arrowtail="none"];
+}

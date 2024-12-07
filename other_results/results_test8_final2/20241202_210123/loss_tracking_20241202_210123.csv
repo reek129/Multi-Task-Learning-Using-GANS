@@ -1,0 +1,1 @@
+epoch,train_seg_loss,train_depth_loss,train_combined_loss,train_adv_loss,valid_seg_loss,valid_depth_loss,valid_combined_loss,valid_adv_loss
